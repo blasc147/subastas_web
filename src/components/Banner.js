@@ -4,7 +4,7 @@ import './style/banner.css';
 
 function Banner() {
   return (
-    <div className="banner-1 cover-image sptb-2 bg-background" data-image-src="../assets/images/banners/auction.jpg" id="banner_home">
+    <div className="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/auction.jpg" id="banner_home">
 				<div className="header-text1 mb-0">
 					<div className="container">
 						<div className="row">

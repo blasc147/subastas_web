@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Layout from './Layout';
 import NotFound from './NotFound';
 import ListaArticulos from '../pages/ListaArticulos';
+import DetalleArticulo from '../pages/DetalleArticulo';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/lista" component={ListaArticulos} />
+        <Route exact path="/detalle" component={DetalleArticulo} />
         <Route path="/404" component={NotFound} />
         <Redirect from="" to="/home"/>
       </Switch>
