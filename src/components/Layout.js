@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from './Header'
+import Header from './Header';
+import Footer from './Footer';
 
 function Layout(props){
     
@@ -7,6 +8,7 @@ function Layout(props){
         <React.Fragment>
         <Header />
         {props.children}
+        <Footer></Footer>
         </React.Fragment>
     );
 }

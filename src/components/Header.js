@@ -33,7 +33,7 @@ class Header extends React.Component{
 							<div className="top-bar-right">
 								<ul className="custom">
 									<li>
-										<a href="register.html" className="text-dark"><i className="fa fa-user mr-1"></i> <span>Register</span></a>
+										<a href="register.html" className="text-dark"><i className="fa fa-user mr-1"></i> <span>Registrarse</span></a>
 									</li>
 									<li>
 										<a href="login.html" className="text-dark"><i className="fa fa-sign-in mr-1"></i> <span>Login</span></a>
@@ -84,16 +84,13 @@ class Header extends React.Component{
 						<nav className="horizontalMenu clearfix d-md-flex">
 							<ul className="horizontalMenu-list">
 							
-								<li aria-haspopup="true"><a href="about.html">About Us </a></li>
-								<li aria-haspopup="true"><a href="contact.html"> Contact Us <span className="wsarrow"></span></a></li>
-								<li aria-haspopup="true" className="d-lg-none mt-5 pb-5 mt-lg-0">
-									<span><a className="btn btn-secondary" href="ad-posts.html">Post Free Ad</a></span>
-								</li>
-							</ul>
-							<ul className="mb-0">
-								<li aria-haspopup="true" className="mt-5 d-none d-lg-block ">
-									<span><a className="btn btn-secondary" href="ad-posts.html">Post Free Ad</a></span>
-								</li>
+								<li aria-haspopup="true"><a href="about.html">Inicio </a></li>
+								<li aria-haspopup="true"><a href="about.html">Institucional </a></li>
+								<li aria-haspopup="true"><a href="about.html">Reglamento </a></li>
+
+								<li aria-haspopup="true"><a href="about.html">Tutoriales </a></li>
+						
+								<li aria-haspopup="true"><a href="contact.html"> Contacto <span className="wsarrow"></span></a></li>
 							</ul>
 						</nav>
 					</div>

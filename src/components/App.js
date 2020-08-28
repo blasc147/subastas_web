@@ -15,10 +15,10 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/lista" component={ListaArticulos} />
         <Route exact path="/detalle" component={DetalleArticulo} />
-        <Route path="/404" component={NotFound} />
         <Redirect from="" to="/home"/>
       </Switch>
       </Layout>
+      <Route exact path="/404" component={NotFound} />
     </BrowserRouter>
   );
 }

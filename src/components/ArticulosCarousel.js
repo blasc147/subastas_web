@@ -10,19 +10,23 @@ function ArticulosCarousel(props){
 		superLargeDesktop: {
 		  // the naming can be any, depends on you.
 		  breakpoint: { max: 4000, min: 3000 },
-		  items: 5
+		  items: 5,
+		  slidesToSlide: 2
 		},
 		desktop: {
 		  breakpoint: { max: 3000, min: 1024 },
-		  items: 3
+		  items: 4,
+		  slidesToSlide: 4
 		},
 		tablet: {
 		  breakpoint: { max: 1024, min: 464 },
-		  items: 2
+		  items: 3,
+		  slidesToSlide: 3
 		},
 		mobile: {
 		  breakpoint: { max: 464, min: 0 },
-		  items: 1
+		  items: 1,
+		  slidesToSlide: 1
 		}
 	  };
 	
@@ -36,8 +40,17 @@ function ArticulosCarousel(props){
 
 				<Carousel 
 				responsive={responsive}
+				centerMode={false}
 				removeArrowOnDeviceType={["tablet", "mobile"]}
-				itemClass="carousel-item-padding-40-px" >
+				itemClass="carousel-item-padding-60-px" 
+				autoPlay={responsive !== "mobile" ? true : false}
+				autoPlaySpeed={4000}
+				customTransition="all 4s linear"
+				keyBoardControl={true}
+				infinite={true}
+				slidesToSlide={1}
+  				swipeable
+  				transitionDuration={4000}>
 
 				{articulos.map(item => {
 					return(
