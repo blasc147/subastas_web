@@ -24,7 +24,7 @@ class Home extends React.Component{
     getArticulos = async() => {
       this.setState({ loading:true, error:null});
         try{
-            const response = await fetch(`https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8`);
+            const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetArticles`);
             const data = await response.json();
             console.log(data);
             this.setState({
@@ -56,13 +56,13 @@ class Home extends React.Component{
 
             <Banner></Banner>
 
-            <Carousel articulos={this.state.data} clase="sptb" titulo="En subasta" />
+            <Carousel articulos={this.state.data} clase="sptb" titulo="En subasta" estado='En subasta'/>
 
             <Categorias></Categorias>
 
-            <Carousel articulos={this.state.data} clase="sptb" titulo="Proximos a subastar" />
+            <Carousel articulos={this.state.data} clase="sptb" titulo="Proximos a subastar" estado='Proximamente'/>
 
-            <Carousel articulos={this.state.data} clase="sptb bg-white" titulo="Subastas finalizadas" />
+            <Carousel articulos={this.state.data} clase="sptb bg-white" titulo="Subastas finalizadas" estado='Finalizados' />
 
             </React.Fragment>
         );
