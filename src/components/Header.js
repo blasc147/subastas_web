@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './images/logo.png'
+import {Link} from 'react-router-dom';
 
 class Header extends React.Component{
     render() {
@@ -42,16 +43,16 @@ class Header extends React.Component{
 										<a href="#" className="text-dark" data-toggle="dropdown"><i className="fa fa-home mr-1"></i><span> My Dashboard</span></a>
 										<div className="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 											<a href="mydash.html" className="dropdown-item" >
-												<i className="dropdown-icon si si-user"></i> My Profile
+												<i className="dropdown-icon si si-user"></i> Mi cuenta
 											</a>
 											<a className="dropdown-item" href="#">
 												<i className="dropdown-icon si si-envelope"></i> Inbox
 											</a>
 											<a className="dropdown-item" href="#">
-												<i className="dropdown-icon si si-bell"></i> Notifications
+												<i className="dropdown-icon si si-bell"></i> Notificaciones
 											</a>
 											<a href="mydash.html" className="dropdown-item" >
-												<i className="dropdown-icon  si si-settings"></i> Account Settings
+												<i className="dropdown-icon  si si-settings"></i> Configuracion
 											</a>
 											<a className="dropdown-item" href="#">
 												<i className="dropdown-icon si si-power"></i> Log out
@@ -84,7 +85,11 @@ class Header extends React.Component{
 						<nav className="horizontalMenu clearfix d-md-flex">
 							<ul className="horizontalMenu-list">
 							
-								<li aria-haspopup="true"><a href="about.html">Inicio </a></li>
+								<li aria-haspopup="true">
+									<Link to="/home">
+                                    	Inicio						
+                                    </Link>
+								</li>
 								<li aria-haspopup="true"><a href="about.html">Institucional </a></li>
 								<li aria-haspopup="true"><a href="about.html">Reglamento </a></li>
 

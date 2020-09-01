@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import imagen from './images/1.jpg';
+import {Link} from 'react-router-dom';
 
 
 
@@ -55,18 +56,18 @@ function ArticulosCarousel(props){
 
 				{articulos.map(item => {
 					return(
-					<div className="item" key={item.ArticuloId}>
+					<div className="item" key={item.id}>
 					<div className="card mb-0">
 					<div className="arrow-ribbon bg-danger">{props.estado}</div>
 						<div className="product-item2">
 							<div className="product-item2-img text-center">
-								<img src={imagen} alt="img" className="mx-auto"/>
+								<img src={item.image} alt="img" className="mx-auto"/>
 							</div>
 						</div>
 						<div className="card-body">
 							<div className="product-item2-desc">
-								<h4 className="font-weight-semibold text-dark"><a href="auction.html">{item.ArticuloTitulo}</a></h4>
-								<p className="text-muted">{item.status}</p>
+								<h4 className="font-weight-semibold text-dark"><a href="auction.html">{item.title}</a></h4>
+								<p className="text-muted">{item.category}</p>
 								
 								<div className="bg-secondary text-white p-2 mt-3 text-center">
 									<span className="hour">03 Days 22 : 47 : 17</span>
@@ -76,9 +77,14 @@ function ArticulosCarousel(props){
 						<div className="card-footer">
 							<div className="product-item-wrap d-flex">
 								<div className="product-item-price">
-									<span className="newprice text-dark">{item.ArticuloPrecioInicial}</span>
+									<span className="newprice text-dark">{item.price}</span>
 								</div>
-								<a href="auction.html" className="btn btn-primary  btn-sm ml-auto">Ver detalle</a>
+								<Link className="btn btn-primary btn-sm ml-auto" to={{
+									pathname: `/detalle/${item.id}/ver`,
+									state: {
+									fromNotifications: true
+									}
+								}}>Ver Detalle</Link>
 							</div>
 						</div>
 					</div>

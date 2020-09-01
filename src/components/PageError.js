@@ -5,7 +5,7 @@ import React from 'react';
 function PageError() {
     return (
     <div id="loading">
-        Error
+        <h1>Error</h1>
     </div>
   );
 }

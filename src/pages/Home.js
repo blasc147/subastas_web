@@ -1,9 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
 import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';
-//import api from '../api';
-//import loader from '../images/default/preloader-color.gif'
 import Banner from '../components/Banner';
 import Carousel from '../components/ArticulosCarousel';
 import Categorias from '../components/Categorias';
@@ -24,9 +21,9 @@ class Home extends React.Component{
     getArticulos = async() => {
       this.setState({ loading:true, error:null});
         try{
-            const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetArticles`);
+            const response = await fetch(`https://fakestoreapi.com/products`);
             const data = await response.json();
-            console.log(data);
+            console.log(data.length);
             this.setState({
               loading:false,
               data: data
@@ -53,8 +50,7 @@ class Home extends React.Component{
 
         return (
           <React.Fragment>
-
-            <Banner></Banner>
+            <Banner size={this.state.data.length}></Banner>
 
             <Carousel articulos={this.state.data} clase="sptb" titulo="En subasta" estado='En subasta'/>
 

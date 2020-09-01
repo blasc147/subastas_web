@@ -1,28 +1,65 @@
 import React from 'react';
-//import PageLoading from '../components/PageLoading';
-//import PageError from '../components/PageError';
-//import api from '../api';
-//import loader from '../images/default/preloader-color.gif'
+import PageLoading from '../components/PageLoading';
+import PageError from '../components/PageError';
 import Banner from '../components/Banner';
-import DetalleComponent from '../components/DetalleComponent';
+import DetalleContainer from '../components/Detalle/DetalleContainer';
 
-class Home extends React.Component{
+class DetalleArticulo extends React.Component{
+
+      state = { 
+        loading: true,
+        error:null,
+        data: { },
+        modalIsOpen: false,
+          };
+
+      componentDidMount(){
+        this.getdetalle();
+      }
+
+      getdetalle = async () => {
+        this.setState({ loading:true, error:null});
+       
+        try{
+          const { handle } = this.props.match.params;
+          const { fromNotifications } = this.props.location.state;
+          const response = await fetch(`https://fakestoreapi.com/products/${handle}`);
+          const data = await response.json();
+      
+            this.setState({
+                loading:false,
+                data:  data ,    
+            })
+
+        }catch(error){
+          console.log("error en la pagina");
+           this.setState({ loading:false, error:error });
+        }
+
+    };
+
     render() {
+      if(this.state.loading === true){
+        return (
+          <PageLoading></PageLoading>
+        );
+      }
+
+      if (this.state.error) {
+        return (
+          <PageError></PageError>
+        );
+      }
 
         return (
           <React.Fragment>
-            <Banner>
+            
+            <DetalleContainer articulo={this.state.data} />
 
-            </Banner>
-            <DetalleComponent>
-
-            </DetalleComponent>
-
-                
             </React.Fragment>
         );
       }
     
 }
 
-export default Home;
+export default DetalleArticulo;
