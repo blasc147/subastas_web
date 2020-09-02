@@ -3,7 +3,7 @@ import Ofertas from './Ofertas';
 
 class DetalleItem extends React.Component{
 	render() {
-		const item=this.props;
+		const item=this.props.item;
         return (
             <React.Fragment>
                 <div className="card">
@@ -12,8 +12,7 @@ class DetalleItem extends React.Component{
 							</div>
 							<div className="card-body">
 								<div className="mb-4">
-									<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atcorrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-									<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoraliz the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble thena bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.</p>
+								<p>{item.description}</p>
 								</div>
 								<h4 className="mb-2 font-weight-bold">Especificaciones</h4>
 								<div className="row">
@@ -22,30 +21,16 @@ class DetalleItem extends React.Component{
 											<table className="table row table-borderless w-100 m-0 text-nowrap ">
 												<tbody className="col-lg-12 col-xl-6 p-0">
 													<tr>
-														<td><span className="font-weight-bold">Type :</span> Normal</td>
+														<td><span className="font-weight-bold">Oferta :</span> ${item.price +100}</td>
 													</tr>
 													<tr>
-														<td><span className="font-weight-bold">Sleeve :</span> Half Sleeve</td>
+														<td><span className="font-weight-bold">Comision martillero :</span> ${(item.price+100) *0.1}</td>
 													</tr>
 													<tr>
-														<td><span className="font-weight-bold">Fabric :</span> Cotton</td>
+														<td><span className="font-weight-bold">Comision subasta electronica :</span> ${(item.price+100) *0.06}</td>
 													</tr>
 													<tr>
-														<td><span className="font-weight-bold">Ideal For :</span> Woman</td>
-													</tr>
-												</tbody>
-												<tbody className="col-lg-12 col-xl-6 p-0">
-													<tr>
-														<td><span className="font-weight-bold">Size :</span> M</td>
-													</tr>
-													<tr>
-														<td><span className="font-weight-bold">Color :</span> Moss Green</td>
-													</tr>
-													<tr>
-														<td><span className="font-weight-bold">Pack of :</span> 1 </td>
-													</tr>
-													<tr>
-														<td><span className="font-weight-bold">Fabric Care :</span> Machine Wash</td>
+														<td><span className="font-weight-bold">Comision de la comision :</span>5%</td>
 													</tr>
 												</tbody>
 											</table>

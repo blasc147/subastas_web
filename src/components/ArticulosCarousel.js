@@ -44,7 +44,7 @@ function ArticulosCarousel(props){
 				responsive={responsive}
 				centerMode={false}
 				removeArrowOnDeviceType={["tablet", "mobile"]}
-				itemClass="carousel-item-padding-60-px" 
+				itemClass="p-3" 
 				autoPlay={responsive !== "mobile" ? true : false}
 				autoPlaySpeed={4000}
 				customTransition="all 4s linear"
@@ -80,7 +80,7 @@ function ArticulosCarousel(props){
 									<span className="newprice text-dark">{item.price}</span>
 								</div>
 								<Link className="btn btn-primary btn-sm ml-auto" to={{
-									pathname: `/detalle/${item.id}/ver`,
+									pathname: `/detalle/${item.id}`,
 									state: {
 									fromNotifications: true
 									}

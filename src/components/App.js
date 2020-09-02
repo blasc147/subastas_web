@@ -4,7 +4,7 @@ import Home from '../pages/Home';
 import Layout from './Layout';
 import NotFound from './NotFound';
 import ListaArticulos from '../pages/ListaArticulos';
-import DetalleArticulo from '../pages/DetalleArticulo';
+import DetalleArticulo from '../components/Detalle/DetalleContainer';
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/lista" component={ListaArticulos} />
-        <Route exact path="/detalle/:handle/ver" component={DetalleArticulo} />
+        <Route exact path="/detalle/:handle" component={DetalleArticulo} />
         <Redirect from="" to="/home"/>
       </Switch>
       </Layout>

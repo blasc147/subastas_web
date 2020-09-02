@@ -5,7 +5,7 @@ import loader from './images/preloader.gif'
 function PageLoading() {
     console.log('Loading');
     return (
-    <div id="loading">
+    <div id="loading" className="center-block text-center">
         <img src={loader} alt="" />
     </div>
   );

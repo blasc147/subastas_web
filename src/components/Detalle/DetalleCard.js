@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+import Modal from './Modal';
 
 class DetalleCard extends React.Component{
 	render() {
-        const item=this.props.item.articulo;
-        console.log(item);
+        const item=this.props.item;
+        
         return (
             <React.Fragment>
                 <div className="card">
@@ -30,50 +31,22 @@ class DetalleCard extends React.Component{
 										<div className="product-gallery-data mb-0">
 											<h3 className="mb-3 font-weight-semibold">{item.title}</h3>
 											<div className="mb-3">
-												<span className="font-weight-bold h1 text-danger">{item.price} </span>
+												<span className="font-weight-bold h1 text-danger">${item.price} </span>
 											</div>
-											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Special price</span> get 20% extra off</a></div>
-											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Bank offer</span> get 15% off on any Credit Cards</a></div>
+											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Inicio de subasta</span> 10/10/2020 a las 10:00</a></div>
+											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Fin de subasta</span> 10/10/2020 a las 10:00</a></div>
 											<h6 className="font-weight-bold mt-4">Detalles</h6>
 											<p className="text-dark">{item.description} </p>
-											<dl className="product-gallery-data1">
-												<dt>Type</dt>
-												<dd>Normal</dd>
-											</dl>
-											<dl className="product-gallery-data1">
-												<dt>Sleeve</dt>
-												<dd>Half Sleeve</dd>
-											</dl>
-											<dl className="product-gallery-data1">
-												<dt>Fabric</dt>
-												<dd>Cotton</dd>
-											</dl>
-											<dl className="product-gallery-data1">
-												<dt>Ideal For</dt>
-												<dd>Woman</dd>
-											</dl>
-											<dl className="product-gallery-data1">
-												<dt>Size</dt>
-												<dd>M</dd>
-											</dl>
-											<dl className="product-gallery-data1">
-												<dt>Color</dt>
-												<dd>Moss Green</dd>
-											</dl>
-											<div className="row">
-												<div className="col-12">
-													<dl className="product-gallery-quty mt-5 mb-0">
-														<dt>Quantity:</dt>
-														<dd>
-															<div className="form-group mb-0">
-																
-															</div>
-														</dd>
-													</dl>
-												</div>
+				
+											
+											<a className="btn  btn-info" onClick={this.props.onOpenModal}> Ofertar ${item.price +100} </a>
+											<Modal 
+											isOpen={this.props.modalIsOpen} 
+											onClose={this.props.onCloseModal}
+											onPushOferta={this.props.onPushOferta}>
+												Juro por dios que estoy seguro de realizar esta oferta
 												
-											</div>
-											<a href="#" className="btn  btn-info"> Realizar Oferta </a>
+											</Modal>
 										</div>
 									</div>
 								</div>
