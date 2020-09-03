@@ -21,7 +21,7 @@ class Home extends React.Component{
     getArticulos = async() => {
       this.setState({ loading:true, error:null});
         try{
-            const response = await fetch(`https://fakestoreapi.com/products`);
+            const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetArticles`);
             const data = await response.json();
             console.log(data.length);
             this.setState({

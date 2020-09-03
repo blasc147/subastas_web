@@ -1,10 +1,28 @@
 import React, { Fragment } from 'react';
 import Modal from './Modal';
+import Countdown, { zeroPad } from 'react-countdown';
+
 
 class DetalleCard extends React.Component{
 	render() {
-        const item=this.props.item;
-        
+		const item=this.props.item;
+		let precio = parseFloat(item.ArticuloSubastaPrecioActual);
+		let inc = parseFloat(item.ArticuloSubastaIncremento);
+		const fechaHoraFin = item.ArticuloSubastaFin.split("T");
+		//const fechaHoraInicio = item.ArticuloSubastaInicio.split("T");
+
+		const Completionist = () => <span>Finalizado !</span>;
+
+	  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+		if (completed) {
+		  // Render a completed state
+		  return <Completionist />;
+		} else {
+		  // Render a countdown
+		return <span>{days} dias {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>;
+		}
+	  };
+		
         return (
             <React.Fragment>
                 <div className="card">
@@ -12,7 +30,9 @@ class DetalleCard extends React.Component{
 								<div className="row no-gutter">
 									<div className="col-lg-6 border-right">
 										<div className=" pb-0 image-zoom-container">
-										    <div className="arrow-ribbon-2 bg-primary"><span className="day">90 Days 20 : 35 : 51</span></div>
+										    <div className="arrow-ribbon-2 bg-primary">
+												<Countdown date={item.ArticuloSubastaFin} renderer={renderer}/>
+											</div>
 											<div className="show image-zoom" href="../assets/images/products/ecommerce/9.png" >
 												<img src={item.image} id="show-img" />
 											</div>
@@ -29,17 +49,17 @@ class DetalleCard extends React.Component{
 									</div>
 									<div className="col-lg-6">
 										<div className="product-gallery-data mb-0">
-											<h3 className="mb-3 font-weight-semibold">{item.title}</h3>
+											<h3 className="mb-3 font-weight-semibold">{item.ArticuloTitulo}</h3>
 											<div className="mb-3">
-												<span className="font-weight-bold h1 text-danger">${item.price} </span>
+												<span className="font-weight-bold h1 text-danger">${precio} </span>
 											</div>
 											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Inicio de subasta</span> 10/10/2020 a las 10:00</a></div>
-											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Fin de subasta</span> 10/10/2020 a las 10:00</a></div>
+											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Fin de subasta</span> {fechaHoraFin[0]} a las {fechaHoraFin[1]}</a></div>
 											<h6 className="font-weight-bold mt-4">Detalles</h6>
-											<p className="text-dark">{item.description} </p>
+											<p className="text-dark">{item.ArticuloDescripcion} </p>
 				
 											
-											<a className="btn  btn-info" onClick={this.props.onOpenModal}> Ofertar ${item.price +100} </a>
+											<a href="javascript:void(0);" className="btn btn-info" onClick={this.props.onOpenModal}> Ofertar ${precio +inc} </a>
 											<Modal 
 											isOpen={this.props.modalIsOpen} 
 											onClose={this.props.onCloseModal}

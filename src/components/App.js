@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/lista" component={ListaArticulos} />
-        <Route exact path="/detalle/:handle" component={DetalleArticulo} />
+        <Route exact path="/detalle/:subId/:artId" component={DetalleArticulo} />
         <Redirect from="" to="/home"/>
       </Switch>
       </Layout>

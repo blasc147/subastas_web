@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import imagen from './images/1.jpg';
 import {Link} from 'react-router-dom';
+import Countdown, { zeroPad } from 'react-countdown';
 
 
 
@@ -29,6 +30,18 @@ function ArticulosCarousel(props){
 		  breakpoint: { max: 464, min: 0 },
 		  items: 1,
 		  slidesToSlide: 1
+		}
+	  };
+
+	  const Completionist = () => <span>Finalizado !</span>;
+
+	  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+		if (completed) {
+		  // Render a completed state
+		  return <Completionist />;
+		} else {
+		  // Render a countdown
+		return <span>{days} dias {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>;
 		}
 	  };
 	
@@ -61,26 +74,26 @@ function ArticulosCarousel(props){
 					<div className="arrow-ribbon bg-danger">{props.estado}</div>
 						<div className="product-item2">
 							<div className="product-item2-img text-center">
-								<img src={item.image} alt="img" className="mx-auto"/>
+								<img src={item.ArticuloImagen} alt="img" className="mx-auto"/>
 							</div>
 						</div>
 						<div className="card-body">
 							<div className="product-item2-desc">
-								<h4 className="font-weight-semibold text-dark"><a href="auction.html">{item.title}</a></h4>
-								<p className="text-muted">{item.category}</p>
+								<h4 className="font-weight-semibold text-dark"><a href="auction.html">{item.ArticuloTitulo}</a></h4>
+								<p className="text-muted">{item.ArticuloDescripcion}</p>
 								
 								<div className="bg-secondary text-white p-2 mt-3 text-center">
-									<span className="hour">03 Days 22 : 47 : 17</span>
+										<Countdown date={item.ArticuloSubastaFin} renderer={renderer} />
 								</div>
 							</div>
 						</div>
 						<div className="card-footer">
 							<div className="product-item-wrap d-flex">
 								<div className="product-item-price">
-									<span className="newprice text-dark">{item.price}</span>
+									<span className="newprice text-dark">{item.ArticuloSubastaPrecioActual}</span>
 								</div>
 								<Link className="btn btn-primary btn-sm ml-auto" to={{
-									pathname: `/detalle/${item.id}`,
+									pathname: `/detalle/${item.SubastaId}/${item.ArticuloId}`,
 									state: {
 									fromNotifications: true
 									}

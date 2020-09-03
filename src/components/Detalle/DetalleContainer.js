@@ -21,9 +21,11 @@ class DetalleContainer extends React.Component{
 			this.setState({ loading:true, error:null});
 		   
 			try{
-			  const { handle } = this.props.match.params;
+			  const sub  = this.props.match.params.subId;
+			  const  art  = this.props.match.params.artId;
+			  console.log(sub);
 			  const { fromNotifications } = this.props.location.state;
-			  const response = await fetch(`https://fakestoreapi.com/products/${handle}`);
+			  const response = await fetch(`http://devapp85.ecom.com.ar/SubastasTest/rest/GetOneArticle?Subastaid=${sub}&Articulosubastaarticuloid=${art}`);
 			  const data = await response.json();
 		  
 				this.setState({

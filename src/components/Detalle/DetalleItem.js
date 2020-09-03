@@ -39,28 +39,14 @@ class DetalleItem extends React.Component{
 								</div>
 								<h4 className="mb-5 mt-2 font-weight-bold">Ultimas ofertas</h4>
 								
-                                <Ofertas>
+                                <Ofertas ofertas={item.Ofertas} >
                                     
                                 </Ofertas>
 
 							</div>
-							<div className="p-4 border-top">
-								<div className="list-id">
-									<div className="row">
-										<div className="col">
-											<a className="mb-0">auction ID : #8256358</a>
-										</div>
-										<div className="col col-auto">
-											Posted By <a className="mb-0 font-weight-bold">Individual</a> / 21st Dec 2018
-										</div>
-									</div>
-								</div>
-							</div>
 							<div className="card-footer">
 								<div className="icons">
-									<a href="#" className="btn btn-info icons"><i className="si si-share mr-1"></i> Share Ad</a>
-									<a href="#" className="btn btn-primary icons"><i className="si si-heart  mr-1"></i> 678</a>
-									<a href="#" className="btn btn-secondary icons"><i className="si si-printer  mr-1"></i> Print</a>
+									<a href="#" className="btn btn-info icons"><i className="si si-share mr-1"></i> Compartir</a>
 								</div>
 							</div>
 						</div>
