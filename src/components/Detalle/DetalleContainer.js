@@ -3,9 +3,13 @@ import DetalleItem from './DetalleItem';
 import DetalleCard from './DetalleCard';
 import PageLoading from '../PageLoading';
 import PageError from '../PageError';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 class DetalleContainer extends React.Component{
-
+	
 	state = { 
 		loading: true,
       	error:null,
@@ -27,7 +31,7 @@ class DetalleContainer extends React.Component{
 			  const  art  = this.props.match.params.artId;
 			  console.log(sub);
 			  const { fromNotifications } = this.props.location.state;
-			  const response = await fetch(`http://devapp85.ecom.com.ar/SubastasTest/rest/GetOneArticle?Subastaid=${sub}&Articulosubastaarticuloid=${art}`);
+			  const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetOneArticle?Subastaid=${sub}&Articulosubastaarticuloid=${art}`);
 			  const data = await response.json();
 		  
 				this.setState({
@@ -36,6 +40,7 @@ class DetalleContainer extends React.Component{
 					precio: data.ArticuloSubastaPrecioActual, 
 					ofertas: data.Ofertas,   
 				})
+
 				console.log(this.state.ofertas);
 			}catch(error){
 			  console.log("error en la pagina");
@@ -55,7 +60,7 @@ class DetalleContainer extends React.Component{
 	  handlePushOferta = async e => {
 		console.log("pusheando oferta");
 		this.setState({ loading:true, error:false});
-		
+		const success = () => toast("La oferta se realizo con exito!");
   
 		try {
 			var articulo=this.state.data;
@@ -87,6 +92,7 @@ class DetalleContainer extends React.Component{
 		  //await api.cursos.remove(this.props.match.params.handle);
 		  this.setState({loading:false});
 		  this.setState({ modalIsOpen : false});
+		  success();
 		  //aca hay que cerrar el modal
   
 		} catch (error) {
@@ -97,6 +103,7 @@ class DetalleContainer extends React.Component{
 	  
 	render() {
 		const item=this.props;
+		
 
 		if(this.state.loading === true && !this.state.data){
 			console.log("loading");
@@ -134,6 +141,7 @@ class DetalleContainer extends React.Component{
 					</div>
 				</div>
 				</section>
+				<ToastContainer />
 			</React.Fragment>
         );
       }
