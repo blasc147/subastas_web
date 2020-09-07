@@ -71,7 +71,7 @@ function ArticulosCarousel(props){
 					return(
 					<div className="item" key={item.id}>
 					<div className="card mb-0">
-					<div className="arrow-ribbon bg-danger">{props.estado}</div>
+					<div className="arrow-ribbon bg-danger">{item.ArticuloEstado}</div>
 						<div className="product-item2">
 							<div className="product-item2-img text-center">
 								<img src={item.ArticuloImagen} alt="img" className="mx-auto"/>

@@ -4,6 +4,7 @@ import PageError from '../components/PageError';
 import Banner from '../components/Banner';
 import Carousel from '../components/ArticulosCarousel';
 import Categorias from '../components/Categorias';
+import ListaArticulo from '../components/Listas/ListaArticulo';
 
 class Home extends React.Component{
     state = {
@@ -58,7 +59,9 @@ class Home extends React.Component{
 
             <Carousel articulos={this.state.data} clase="sptb" titulo="Proximos a subastar" estado='Proximamente'/>
 
-            <Carousel articulos={this.state.data} clase="sptb bg-white" titulo="Subastas finalizadas" estado='Finalizados' />
+            <ListaArticulo articulos={this.state.data}>
+
+            </ListaArticulo>
 
             </React.Fragment>
         );

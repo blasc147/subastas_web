@@ -6,10 +6,10 @@ import Countdown, { zeroPad } from 'react-countdown';
 class DetalleCard extends React.Component{
 	render() {
 		const item=this.props.item;
-		let precio = parseFloat(item.ArticuloSubastaPrecioActual);
+		let precio = parseFloat(this.props.precio);
 		let inc = parseFloat(item.ArticuloSubastaIncremento);
 		const fechaHoraFin = item.ArticuloSubastaFin.split("T");
-		//const fechaHoraInicio = item.ArticuloSubastaInicio.split("T");
+		const fechaHoraInicio = item.ArticuloSubastainicio.split("T");
 
 		const Completionist = () => <span>Finalizado !</span>;
 
@@ -34,7 +34,7 @@ class DetalleCard extends React.Component{
 												<Countdown date={item.ArticuloSubastaFin} renderer={renderer}/>
 											</div>
 											<div className="show image-zoom" href="../assets/images/products/ecommerce/9.png" >
-												<img src={item.image} id="show-img" />
+												<img src={item.ArticuloImagen} id="show-img" />
 											</div>
 											<div className="small-img">
 												<img src="../assets/plugins/Image-Zoom/images/online_icon_right@2x.png" className="icon-left" alt="" id="prev-img" />
@@ -53,10 +53,22 @@ class DetalleCard extends React.Component{
 											<div className="mb-3">
 												<span className="font-weight-bold h1 text-danger">${precio} </span>
 											</div>
-											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Inicio de subasta</span> 10/10/2020 a las 10:00</a></div>
+											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Inicio de subasta</span> {fechaHoraInicio[0]} a las {fechaHoraInicio[1]}</a></div>
 											<div><a href=""><i className="fa fa-tag text-success"></i> <span className="text-dark font-weight-bold">Fin de subasta</span> {fechaHoraFin[0]} a las {fechaHoraFin[1]}</a></div>
 											<h6 className="font-weight-bold mt-4">Detalles</h6>
 											<p className="text-dark">{item.ArticuloDescripcion} </p>
+											<dl className="product-gallery-data1">
+												<dt>Estado</dt>
+												<dd>{item.ArticuloEstado}</dd>
+											</dl>
+											<dl className="product-gallery-data1">
+												<dt>Año</dt>
+												<dd>{item.ArticuloAno}</dd>
+											</dl>
+											<dl className="product-gallery-data1">
+												<dt>Color</dt>
+												<dd>{item.ArticuloColor}</dd>
+											</dl>
 				
 											
 											<a href="javascript:void(0);" className="btn btn-info" onClick={this.props.onOpenModal}> Ofertar ${precio +inc} </a>
@@ -64,7 +76,7 @@ class DetalleCard extends React.Component{
 											isOpen={this.props.modalIsOpen} 
 											onClose={this.props.onCloseModal}
 											onPushOferta={this.props.onPushOferta}>
-												Juro por dios que estoy seguro de realizar esta oferta
+												Una vez confirmada la oferta, no podra ser cancelada. Confirmar si esta seguro de realizar la oferta por el monto estipulado.
 												
 											</Modal>
 										</div>

@@ -13,7 +13,7 @@ function Modal(props){
 			<div className="modal-dialog" role="document">
 				<div className="modal-content ">
 					<div className="modal-header">
-						<h5 className="modal-title" id="exampleModalLabel">Realizar oferta</h5>
+						<h5 className="modal-title" id="exampleModalLabel">Confirmar oferta</h5>
 						<button onClick={props.onClose} type="button" className="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>

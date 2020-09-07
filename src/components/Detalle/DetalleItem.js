@@ -4,6 +4,7 @@ import Ofertas from './Ofertas';
 class DetalleItem extends React.Component{
 	render() {
 		const item=this.props.item;
+		const ofertas=this.props.ofertas;
         return (
             <React.Fragment>
                 <div className="card">
@@ -39,7 +40,7 @@ class DetalleItem extends React.Component{
 								</div>
 								<h4 className="mb-5 mt-2 font-weight-bold">Ultimas ofertas</h4>
 								
-                                <Ofertas ofertas={item.Ofertas} >
+                                <Ofertas ofertas={ofertas} >
                                     
                                 </Ofertas>
 
