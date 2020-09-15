@@ -5,7 +5,7 @@ import icono3 from "./images/ecommerce2/group.png";
 import icono4 from "./images/ecommerce2/networking.png";
 import icono5 from "./images/ecommerce2/baby.png";
 import icono6 from "./images/ecommerce2/open-book.png";
-import {Link} from 'react-router-dom';
+import {Link} from 'wouter';
 
 
 

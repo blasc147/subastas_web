@@ -1,10 +1,26 @@
-import React from 'react';
-import logo from './images/logo.png'
-import {Link} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import './style/header.css'
+import {Link} from 'wouter';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+//import Modal from './Auth/ModalLogin'
+//import ModalLogin from './Auth/ModalLogin';
+import useUser from '../hooks/UseUser';
 
-class Header extends React.Component{
-    render() {
 
+export default function Header(){
+
+	const {isLogged, logout}= useUser()
+
+	const  handleClick= e =>{
+		e.preventDefault();
+			logout();
+		  const logoutToaster = () => toast.info("Te deslogueaste correctamente");
+		  logoutToaster();
+			console.log("me fui");
+	}
+	
+	
         return (
             <div className="header-main">
 			<div className="top-bar">
@@ -36,29 +52,15 @@ class Header extends React.Component{
 									<li>
 										<a href="register.html" className="text-dark"><i className="fa fa-user mr-1"></i> <span>Registrarse</span></a>
 									</li>
-									<li>
-										<a href="login.html" className="text-dark"><i className="fa fa-sign-in mr-1"></i> <span>Login</span></a>
+									{ isLogged 
+
+
+										?	<li><a onClick={handleClick} className="text-dark"><i className="fa fa-sign-in mr-1"></i> <span>Logout</span></a></li>
+									
+									   : <li><a href="http://stage.ventanillaunica.chaco.gov.ar/oauth/v2/auth_login?client_id=67_1iibple6ljy8w0ckcs8s4c888kkk8gwg8ws0owc4ogo0oo4www" className="text-dark"><i className="fa fa-sign-in mr-1"></i> <span>Login</span></a>
 									</li>
-									<li className="dropdown">
-										<a href="#" className="text-dark" data-toggle="dropdown"><i className="fa fa-home mr-1"></i><span> My Dashboard</span></a>
-										<div className="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-											<a href="mydash.html" className="dropdown-item" >
-												<i className="dropdown-icon si si-user"></i> Mi cuenta
-											</a>
-											<a className="dropdown-item" href="#">
-												<i className="dropdown-icon si si-envelope"></i> Inbox
-											</a>
-											<a className="dropdown-item" href="#">
-												<i className="dropdown-icon si si-bell"></i> Notificaciones
-											</a>
-											<a href="mydash.html" className="dropdown-item" >
-												<i className="dropdown-icon  si si-settings"></i> Configuracion
-											</a>
-											<a className="dropdown-item" href="#">
-												<i className="dropdown-icon si si-power"></i> Log out
-											</a>
-										</div>
-									</li>
+						
+									}
 								</ul>
 							</div>
 						</div>
@@ -76,11 +78,14 @@ class Header extends React.Component{
 				</div>
 			</div>
 
+			<div className="jumps-prevent" ></div>
+
             <div>
+				<div id="sticky-wrapper" className="sticky-wrapper">
 				<div className="horizontal-main clearfix">
 					<div className="horizontal-mainwrapper container clearfix">
 						<div className="desktoplogo">
-							<a href="index.html"><img src={logo} alt="" /></a>
+							<a href="index.html"><img src="" alt="" /></a>
 						</div>
 						<nav className="horizontalMenu clearfix d-md-flex">
 							<ul className="horizontalMenu-list">
@@ -100,11 +105,10 @@ class Header extends React.Component{
 						</nav>
 					</div>
 				</div>
+				</div>
 			</div>
+			<ToastContainer />
 		</div>
         );
       }
     
-}
-
-export default Header;

@@ -1,24 +1,40 @@
 import React from 'react';
 import Filtros from './Filtros';
-import img from '../images/1.jpg';
 import './listas.css';
-import {Link} from 'react-router-dom';
-import Countdown, { zeroPad } from 'react-countdown';
+import ListaItem from './ListaItem';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 class ListaArticulo extends React.Component {
-render(){
-	const items = this.props.articulos;
-	const Completionist = () => <span>Finalizado !</span>;
 
-	  const renderer = ({ days, hours, minutes, seconds, completed }) => {
-		if (completed) {
-		  // Render a completed state
-		  return <Completionist />;
-		} else {
-		  // Render a countdown
-		return <span>{days} dias {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>;
-		}
+	
+	
+	state = {
+		cant: 6,
+		items: this.props.articulos.slice(0, 6),
+		hasMore: true,
+		
 	  };
+	
+	  fetchMoreData = () => {
+		// a fake async api call like which sends
+		// 20 more records in 1.5 secs
+
+		if (this.state.items.length >= this.props.articulos.length) {
+			this.setState({ hasMore: false });
+			return;
+		  }
+		setTimeout(() => {
+		  this.setState({
+			items: this.state.items.concat(this.props.articulos.slice(this.state.cant, this.state.cant+6)),
+			cant: this.state.cant+6,
+		  });
+		}, 1500);
+	  };
+	  
+render(){
+	const artis = this.props.articulos;
+	
   return (
     <section className="sptb">
 		
@@ -29,56 +45,47 @@ render(){
 						<div className="card mb-0">
 							
 							<div className="card-body">
-							<div class="section-title center-block text-center"><h1>Articulos en subasta</h1></div>
+							<div class="section-title center-block text-center"><h1>Artículos subastados actualmente</h1></div>
 								<div className="item2-gl ">
+								<InfiniteScroll
+												dataLength={this.state.items.length}
+												next={this.fetchMoreData}
+												hasMore={this.state.hasMore}
+												loader={<h5>Cargando mas...</h5>}
+												endMessage={
+													<p style={{ textAlign: "center" }}>
+													<b>No hay mas articulos en subasta</b>
+													</p>
+												}
+												>
 								
 									<div className="tab-content">
 										
 										<div className="tab-pane active" id="tab-12">
 											<div className="row">
-											{items.map(item => {
-												return(
-													<div class="col-lg-6 col-md-12 col-xl-4">
-													<div class="card card_lista overflow-hidden">
-														
-														<div class="item-card2-img">
-															<div class="arrow-ribbon bg-primary">{item.ArticuloSubastaPrecioActual}</div>
-															
-															<img src={item.ArticuloImagen} alt="img" class="cover-image" />
-														</div>
-														<div class="item-card7-overlaytext">
-															<a class="text-white badge badge-primary">
-															<Countdown date={item.ArticuloSubastaFin} renderer={renderer} />
-															</a>
-														</div>
-														<div class="card-body">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="ecommerce.html">{item.ArticulosCategoria}</a>
-																	<a href="ecommerce.html" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">{item.ArticuloTitulo}</h4></a>
-																	<p class="mb-0">{item.ArticuloDescripcion}</p>
-																</div>
-															</div>
-														</div>
+											
+												{this.state.items.map((item, index) => (
+													<ListaItem 
+													key={item.ArticuloSubastaId}
+													precio={item.ArticuloSubastaPrecioActual}
+													imagen={item.ArticuloImagen}
+													fin={item.ArticuloSubastaFin}
+													categoria={item.ArticuloCategoria}
+													descripcion={item.ArticuloDescripcion}
+													titulo={item.ArticuloTitulo}
+													subastaid={item.SubastaId}
+													articuloid={item.ArticuloId}
+													>
 
-														<div class="card-body">
-														<Link className="btn btn-white btn-block" to={{
-															pathname: `/detalle/${item.SubastaId}/${item.ArticuloId}`,
-															state: {
-															fromNotifications: true
-															}
-														}}>Ver Detalle</Link>
-														</div>
-													</div>
-												</div>
-													);
-
-										})}
+													</ListaItem>
+												))}
+												
 												
 												
 											</div>
 										</div>
 									</div>
+									</InfiniteScroll>
 								</div>
 							</div>
 						</div>

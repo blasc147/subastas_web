@@ -60,7 +60,7 @@ class DetalleContainer extends React.Component{
 	  handlePushOferta = async e => {
 		console.log("pusheando oferta");
 		this.setState({ loading:true, error:false});
-		const success = () => toast("La oferta se realizo con exito!");
+		const success = () => toast.success("La oferta se realizo con exito!");
   
 		try {
 			var articulo=this.state.data;

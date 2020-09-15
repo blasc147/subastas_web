@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import imagen from './images/1.jpg';
-import {Link} from 'react-router-dom';
+import {Link} from 'wouter';
 import Countdown, { zeroPad } from 'react-countdown';
 
 
@@ -69,7 +69,7 @@ function ArticulosCarousel(props){
 
 				{articulos.map(item => {
 					return(
-					<div className="item" key={item.id}>
+					<div className="item" key={item.ArticuloId}>
 					<div className="card mb-0">
 					<div className="arrow-ribbon bg-danger">{item.ArticuloEstado}</div>
 						<div className="product-item2">
