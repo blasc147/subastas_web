@@ -2,6 +2,7 @@ import React from 'react';
 import Filtros from './Filtros';
 import './listas.css';
 import ListaItem from './ListaItem';
+import Loader from '../MiniLoader'
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
@@ -33,7 +34,6 @@ class ListaArticulo extends React.Component {
 	  };
 	  
 render(){
-	const artis = this.props.articulos;
 	
   return (
     <section className="sptb">
@@ -45,19 +45,19 @@ render(){
 						<div className="card mb-0">
 							
 							<div className="card-body">
-							<div class="section-title center-block text-center"><h1>Artículos subastados actualmente</h1></div>
+  							<div className="section-title center-block text-center"><h1>{this.props.nombre} {this.props.titulo}</h1></div>
 								<div className="item2-gl ">
 								<InfiniteScroll
-												dataLength={this.state.items.length}
-												next={this.fetchMoreData}
-												hasMore={this.state.hasMore}
-												loader={<h5>Cargando mas...</h5>}
-												endMessage={
-													<p style={{ textAlign: "center" }}>
-													<b>No hay mas articulos en subasta</b>
-													</p>
-												}
-												>
+									dataLength={this.state.items.length}
+									next={this.fetchMoreData}
+									hasMore={this.state.hasMore}
+									loader={<Loader />}
+									endMessage={
+										<p style={{ textAlign: "center" }}>
+										<b>No hay mas articulos en subasta</b>
+										</p>
+									}
+									>
 								
 									<div className="tab-content">
 										

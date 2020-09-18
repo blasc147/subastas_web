@@ -13,14 +13,18 @@ function Banner(props) {
 									<h1 className=""><span className="font-weight-bold">{props.size}</span> articulos en subasta actualmente</h1>
 								</div>
 								<div className="search-background mb-0">
-									<div className="form row no-gutters">
-										<div className="form-group  col-xl-10 col-lg-9 col-md-12 mb-0">
-											<input type="text" className="form-control input-lg border-right-0" id="text" placeholder="Buscar Producto" />
+									<form onSubmit={props.onSubmit}>
+										<div className="form row no-gutters">
+											
+												<div className="form-group  col-xl-10 col-lg-9 col-md-12 mb-0">
+													<input type="text" className="form-control input-lg border-right-0" id="text" placeholder="Buscar Producto" name="buscar" value={props.buscadorValue} onChange={props.onChange} />
+												</div>
+												<div className="col-xl-2 col-lg-3 col-md-12 mb-0">
+													<button className="btn btn-lg btn-block btn-secondary">Buscar</button>
+												</div>
+											
 										</div>
-										<div className="col-xl-2 col-lg-3 col-md-12 mb-0">
-											<a href="#" className="btn btn-lg btn-block btn-secondary">Buscar</a>
-										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>

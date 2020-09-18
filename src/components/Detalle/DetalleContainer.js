@@ -29,9 +29,14 @@ class DetalleContainer extends React.Component{
 			try{
 			  const sub  = this.props.match.params.subId;
 			  const  art  = this.props.match.params.artId;
-			  console.log(sub);
+			  const store = localStorage.getItem("publico");
+					const requestOptions = {
+					method: 'GET',
+					headers: { 'Authorization': 'OAuth '+store},
+					
+				};
 			  const { fromNotifications } = this.props.location.state;
-			  const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetOneArticle?Subastaid=${sub}&Articulosubastaarticuloid=${art}`);
+			  const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetOneArticle?Subastaid=${sub}&Articulosubastaarticuloid=${art}`, requestOptions);
 			  const data = await response.json();
 		  
 				this.setState({
@@ -61,23 +66,35 @@ class DetalleContainer extends React.Component{
 		console.log("pusheando oferta");
 		this.setState({ loading:true, error:false});
 		const success = () => toast.success("La oferta se realizo con exito!");
+		
   
 		try {
 			var articulo=this.state.data;
 			var precioOferta = parseFloat(articulo.ArticuloSubastaPrecioActual)+parseFloat(articulo.ArticuloSubastaIncremento);
-			
+			const codigo = sessionStorage.getItem("code");
+			const token = sessionStorage.getItem("mitoken");
+			if (codigo===null){
+
+			}
 			const requestOptions = {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+				headers: { 'Content-Type': 'application/json', 
+							'Authorization': 'OAuth '+ token},
 				body: JSON.stringify({ 
 					"OfertaSubastaId": articulo.SubastaId,
 					"OfertaArticuloSubastaArticuloId": articulo.ArticuloId,
-					"OfertaUsuarioId": "1",
+					"OfertaUsuarioId": codigo,
 					"OfertaMonto":  precioOferta,
 				})
 			};
 			fetch('https://devapp85.ecom.com.ar/SubastasTest/rest/Oferta/0', requestOptions)
-			.then(response => response.json())
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				  } else {
+					throw new Error("Ocurrio un error, intente mas tarde");
+				  }
+			})
 			.then(data => {
 				console.log('Saved');
 				this.setState({ precio: data.OfertaMonto});
@@ -87,17 +104,22 @@ class DetalleContainer extends React.Component{
 					}
 			 });
 				console.log(this.state.ofertas);
-			}		);
-			  
-		  //await api.cursos.remove(this.props.match.params.handle);
+				success();
+			})
+			.catch((error) => {
+				this.setState({ loading:false, error:error });
+				console.log(error);
+				const errortoast = () => toast.error(error);
+		  		errortoast();
+			  });
 		  this.setState({loading:false});
 		  this.setState({ modalIsOpen : false});
-		  success();
+		  
 		  //aca hay que cerrar el modal
   
 		} catch (error) {
 		  this.setState({ loading:false, error:error });
-		  
+		  console.log("todo mal");
 		}
 	  };
 	  

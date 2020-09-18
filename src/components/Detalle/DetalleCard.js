@@ -1,18 +1,18 @@
 import React, { Fragment } from 'react';
 import Modal from './Modal';
 import Countdown, { zeroPad } from 'react-countdown';
+import useUser from '../../hooks/UseUser';
 
 
-class DetalleCard extends React.Component{
-	render() {
-		const item=this.props.item;
-		let precio = parseFloat(this.props.precio);
+export default function DetalleCard(props){
+		const item=props.item;
+		const {isLogged}= useUser()
+		let precio = parseFloat(props.precio);
 		let inc = parseFloat(item.ArticuloSubastaIncremento);
 		const fechaHoraFin = item.ArticuloSubastaFin.split("T");
 		const fechaHoraInicio = item.ArticuloSubastainicio.split("T");
 
 		const Completionist = () => <span>Finalizado !</span>;
-
 	  const renderer = ({ days, hours, minutes, seconds, completed }) => {
 		if (completed) {
 		  // Render a completed state
@@ -22,7 +22,6 @@ class DetalleCard extends React.Component{
 		return <span>{days} dias {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}</span>;
 		}
 	  };
-		
         return (
             <React.Fragment>
                 <div className="card">
@@ -70,12 +69,15 @@ class DetalleCard extends React.Component{
 												<dd>{item.ArticuloColor}</dd>
 											</dl>
 				
+											{isLogged
+											?<Fragment><h6 class="font-weight-bold mt-4">Realizar una Oferta</h6><button className="btn btn-lg btn-success" onClick={props.onOpenModal}> Ofertar ${precio +inc} </button></Fragment>
+											:<Fragment><h6 class="font-weight-bold mt-4">Para realizar una oferta tenes que estar logueado</h6><a href="http://stage.ventanillaunica.chaco.gov.ar/oauth/v2/auth_login?client_id=67_1iibple6ljy8w0ckcs8s4c888kkk8gwg8ws0owc4ogo0oo4www" className="btn btn-lg btn-primary" ><i class="fa fa-user"></i>Login </a></Fragment>
+											}
 											
-											<a href="javascript:void(0);" className="btn btn-info" onClick={this.props.onOpenModal}> Ofertar ${precio +inc} </a>
 											<Modal 
-											isOpen={this.props.modalIsOpen} 
-											onClose={this.props.onCloseModal}
-											onPushOferta={this.props.onPushOferta}>
+											isOpen={props.modalIsOpen} 
+											onClose={props.onCloseModal}
+											onPushOferta={props.onPushOferta}>
 												Una vez confirmada la oferta, no podra ser cancelada. Confirmar si esta seguro de realizar la oferta por el monto estipulado.
 												
 											</Modal>
@@ -88,7 +90,3 @@ class DetalleCard extends React.Component{
 
 );
 }
-
-}
-
-export default DetalleCard
