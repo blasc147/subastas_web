@@ -4,13 +4,14 @@ import './style/banner.css';
 
 function Banner(props) {
   return (
-    <div className="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/auction.jpg" id="banner_home">
-				<div className="header-text1 mb-0">
+    <div className="banner-1 cover-image sptb-2 bg-background2" data-image-src="../images/auction.jpg" id="banner_home">
+				<div className="header-text mb-0">
 					<div className="container">
 						<div className="row">
 							<div className="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div className="text-center text-white ">
-									<h1 className=""><span className="font-weight-bold">{props.size}</span> articulos en subasta actualmente</h1>
+									<h1 className="">Plataforma <span className="font-weight-bold">#subastasWeb</span> </h1>
+									<p>Actualmente {props.size} artículos se encuentran en subasta activa</p>
 								</div>
 								<div className="search-background mb-0">
 									<form onSubmit={props.onSubmit}>

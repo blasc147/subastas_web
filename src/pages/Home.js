@@ -15,7 +15,7 @@ class Home extends React.Component{
       data: null,
       categorias:null,
       buscador:false,
-      buscadorValue: null,
+      buscadorValue: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +35,7 @@ class Home extends React.Component{
           headers: { 'Content-Type': 'text/plain' },
           body: "client_id=8aa0394f60cc46838f2b434be95c2c57&granttype=password&scope=FullControl&username=public&password=public123",
         };
-        fetch('http://devapp85.ecom.com.ar/SubastasTest/oauth/access_token', requestOptions)
+        fetch('https://devapp85.ecom.com.ar/SubastasTest/oauth/access_token', requestOptions)
         .then(response => {
           if (response.ok) {
               return response.json();
@@ -44,19 +44,19 @@ class Home extends React.Component{
             }
       })
         .then(data => {
-          localStorage.setItem("publico", data.access_token);
+          sessionStorage.setItem("publico", data.access_token);
                   
               })
-              .catch((error) => {
-                  console.log(error)
-                });
+        .catch((error) => {
+            console.log(error)
+          });
     };
 
     getArticulos = async() => {
       this.setState({ loading:true, error:null});
       
         try{
-          const store = localStorage.getItem("publico");
+          const store = sessionStorage.getItem("publico");
             const requestOptions = {
               method: 'GET',
               headers: { 'Authorization': 'OAuth '+store},
@@ -75,7 +75,7 @@ class Home extends React.Component{
             })
             console.log(dataCat);
         }catch(error){
-          console.log("error en la pagina");
+          console.log("error en la pagina : "+error);
           this.setState({ loading:false, error:error });
         }
     };
@@ -136,11 +136,11 @@ class Home extends React.Component{
               </Fragment>
             :
             <Fragment>
-              <Carousel articulos={this.state.data} clase="sptb" titulo="En subasta" estado='En subasta'/>
+              <Carousel articulos={this.state.data} clase="sptb" titulo="En subasta" estado='Subasta activa' subtitulos='Estos artículos se encuentran actualmente en subasta activa'/>
 
               <Categorias data={this.state.categorias}></Categorias>
 
-              <Carousel articulos={this.state.data} clase="sptb" titulo="Proximos a subastar" estado='Proximamente' descripcion/>
+              <Carousel articulos={this.state.data} clase="sptb" titulo="Proximos a subastar" estado='Proximamente' subtitulos='Artículos proximos a ser subastados'/>
 
               <ListaArticulo articulos={this.state.data} titulo="Artículos subastados actualmente">
 

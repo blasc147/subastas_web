@@ -24,24 +24,21 @@ export default function Categorias(props){
 					<div className="row">
 
 					{props.data.map((item, index) => (
-													<div className="col-lg-2 col-md-4 col-sm-6">
-													<div className="item-all-card text-dark text-center">
-														<Link to={'/lista'}></Link>
-														<div className="iteam-all-icon">
-															<img src={icono} className="imag-service" alt="Hotel" />
-														</div>
-														<div className="item-all-text mt-3">
-															<h5 className="mb-0 text-body">{item.CategoriaNombre}</h5>
-														</div>
-													</div>
-												</div>
-												))}
+						<div className="col-lg-2 col-md-4 col-sm-6" key={item.CategoriaId}>
+						<div className="item-all-card text-dark text-center">
+							<Link to={'/lista'}></Link>
+							<div className="iteam-all-icon">
+								<i className={item.CategoriaIcon} ></i>
+							</div>
+							<div className="item-all-text mt-3">
+								<h5 className="mb-0 text-body">{item.CategoriaNombre}</h5>
+							</div>
+						</div>
+					</div>
+					))}
 						
 					</div>
 
-					<div className="mt-4">
-						<a href="auction-list" className="btn btn-primary">View More</a>
-					</div>
 				</div>
 			</div>
 		</section>

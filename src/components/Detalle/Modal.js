@@ -21,7 +21,7 @@ function Modal(props){
 					<div className="modal-body">
                         <p>{props.children}</p>
 						<div className="form-footer mt-2">
-							<a onClick={props.onPushOferta} className="btn btn-primary btn-block">Confirmar</a>
+							<button onClick={props.onPushOferta} className="btn btn-primary btn-block">Confirmar</button>
 						</div>
 					</div>
 				</div>

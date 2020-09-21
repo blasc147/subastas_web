@@ -8,10 +8,11 @@ import PageLoading from '../../components/PageLoading';
 
 export default function Logueado(props){
       const {login, isLogged} = useUser();
+      const {loading, setLoading} = useState(false);
 
       useEffect(() => {
         const cliente = queryString.parse(props.location.search, { ignoreQueryPrefix: true }).code;
-
+        
         try {
           fetch('http://devapp85.ecom.com.ar/SubastasTest/servlet/com.subastas.acallback?'+cliente)
                 .then(response => {
@@ -25,12 +26,13 @@ export default function Logueado(props){
                           login(data.GamToken, data.GamWsLoginUser.User.FirstName, data.GamWsLoginUser.User.Code);
                           const toasterlogued = () => toast.success("Bienvenido"+" "+data.GamWsLoginUser.User.FirstName);
                           toasterlogued();
-
+                          
                       })
                   .catch((error) => {
                   const toastererror = () => toast.error("Ocurrio un error en el proceso de logueo. Intentar nuevamente mas tarde");
                   toastererror();
-                  console.log(error)
+                  console.log(error);
+                
                         });
             } catch (error) {
                 console.log("error en la api");
@@ -38,9 +40,11 @@ export default function Logueado(props){
         }
         
       });
+
 	  
   return (
-    <React.Fragment> <Redirect to='/home'/>
+    <React.Fragment> 
+      <Redirect to='/home'/>
     
     <ToastContainer />
     </React.Fragment>

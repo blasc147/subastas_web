@@ -48,14 +48,13 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/lista" component={ListaArticulos} />
         <Route exact path="/detalle/:subId/:artId" component={DetalleArticulo} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={Logueado} />
+        <Route exact path="/login" component={Logueado} />
         <Route exact path="/subastasUsuario" component={SubastasUsuario} />
-       
+        <Route component={NotFound} />
       </Switch>
       
       </Layout>
-      <Route exact path="/404" component={NotFound} />
+      
       
       </BrowserRouter>
       </Suspense>

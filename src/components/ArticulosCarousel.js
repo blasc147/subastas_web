@@ -50,7 +50,7 @@ function ArticulosCarousel(props){
 			<div className="container">
 				<div className="section-title center-block text-center">
   				<h1>{props.titulo}</h1>
-					<p>Mauris ut cursus nunc. Morbi eleifend, ligula at consectetur vehicula</p>
+  				<p>{props.subtitulos}</p>
 				</div>
 
 				<Carousel 

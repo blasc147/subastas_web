@@ -66,7 +66,7 @@ render(){
 											
 												{this.state.items.map((item, index) => (
 													<ListaItem 
-													key={item.ArticuloSubastaId}
+													key={index}
 													precio={item.ArticuloSubastaPrecioActual}
 													imagen={item.ArticuloImagen}
 													fin={item.ArticuloSubastaFin}
