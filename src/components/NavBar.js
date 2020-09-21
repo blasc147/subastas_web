@@ -23,7 +23,7 @@ const Navbar = (props) => (
 							<ul className="horizontalMenu-list">
 							
 								<li aria-haspopup="true">
-									<Link to="/home">
+									<Link to="/home" >									
                                     	Inicio						
                                     </Link>
 								</li>

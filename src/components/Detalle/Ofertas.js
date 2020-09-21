@@ -16,7 +16,7 @@ class Ofertas extends React.Component{
 											</tr>
 										</thead>
 										<tbody>
-										{ofertas.map(item => {
+										{ofertas.slice([0], [3]).map(item => {
 											const fechaHora = item.OfertaFechaHora.split("T");
 											return(
 											<tr key={item.OfertaId}>

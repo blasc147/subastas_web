@@ -5,6 +5,7 @@ import Banner from '../components/Banner';
 import Carousel from '../components/ArticulosCarousel';
 import Categorias from '../components/Categorias';
 import ListaArticulo from '../components/Listas/ListaArticulo';
+import {Redirect} from 'react-router-dom';
 
 class Home extends React.Component{
   constructor(props) {
@@ -14,9 +15,11 @@ class Home extends React.Component{
       error: null, 
       data: null,
       categorias:null,
-      buscador:false,
       buscadorValue: "",
+      filtrados:null,
+      redirect:false
     };
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 }
@@ -91,11 +94,19 @@ class Home extends React.Component{
 
   handleSubmit = async e => {
       e.preventDefault();
-      this.setState({loading : true, error : null, buscador:true});
-
+      if (this.state.buscadorValue!=""){
+        this.setState({loading : true, error : null, redirect:true});
+      }
+      var busca= this.state.buscadorValue.toLowerCase();
+      if (this.state.data!=null){
+        var filtrar =  this.state.data.filter(function(art) {
+            return art.ArticuloDescripcion.toLowerCase().includes(busca)
+          });
+        
+      }
       try {
-          console.log(this.state.buscadorValue);
-          this.setState({loading:false});
+          this.setState({filtrados:filtrar})
+         
           
       } catch (error) {
           this.setState({loading:false, error:error})
@@ -116,6 +127,23 @@ class Home extends React.Component{
         );
       }
 
+      if(this.state.data===null){
+        return (
+          <h2>No hay articulos cargados</h2>
+        );
+      }
+      if(this.state.redirect){
+        return (
+          <Redirect
+            to={{
+            pathname: "/search",
+            state: { articulos: this.state.filtrados,
+                      palabra: this.state.buscadorValue }
+          }}
+        />
+        );
+      }
+
       
         return (
           <React.Fragment>
@@ -127,14 +155,8 @@ class Home extends React.Component{
             >
 
             </Banner>
-
-            {this.state.buscador
-            ? <Fragment>
-              <ListaArticulo articulos={this.state.data} titulo="Resultado de la busqueda">
-
-              </ListaArticulo>
-              </Fragment>
-            :
+            
+            
             <Fragment>
               <Carousel articulos={this.state.data} clase="sptb" titulo="En subasta" estado='Subasta activa' subtitulos='Estos artículos se encuentran actualmente en subasta activa'/>
 
@@ -146,7 +168,7 @@ class Home extends React.Component{
 
               </ListaArticulo>
             </Fragment>
-            }
+            
             </React.Fragment>
         );
       }

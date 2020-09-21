@@ -79,7 +79,7 @@ function ArticulosCarousel(props){
 						</div>
 						<div className="card-body">
 							<div className="product-item2-desc">
-								<h4 className="font-weight-semibold text-dark"><a href="auction.html">{item.ArticuloTitulo}</a></h4>
+								<h4 className="font-weight-semibold text-dark">{item.ArticuloTitulo}</h4>
 								<p className="text-muted">{item.ArticuloDescripcion}</p>
 								
 								<div className="bg-secondary text-white p-2 mt-3 text-center">

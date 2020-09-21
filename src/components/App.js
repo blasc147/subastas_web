@@ -1,10 +1,11 @@
 import React,{ Fragment, useEffect, useRef, useState,Suspense } from 'react';
-import {Link, Route, Switch, BrowserRouter} from 'react-router-dom';
+import {Link, Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 //import Home from '../pages/Home';
 import Layout from './Layout';
 import Header from './Header';
 import NavBar from './NavBar';
 import NotFound from './NotFound';
+import Buscador from './Listas/Buscador'
 import SubastasUsuario from '../pages/SubastasUsuario';
 import ListaArticulos from '../pages/ListaArticulos';
 import DetalleArticulo from '../components/Detalle/DetalleContainer';
@@ -45,17 +46,20 @@ function App() {
         </div>
         </div>
       <Switch>
+        <Route exact path="/">
+            <Redirect to="/home" />
+        </Route>
         <Route exact path="/home" component={Home} />
         <Route exact path="/lista" component={ListaArticulos} />
         <Route exact path="/detalle/:subId/:artId" component={DetalleArticulo} />
         <Route exact path="/login" component={Logueado} />
         <Route exact path="/subastasUsuario" component={SubastasUsuario} />
+        <Route exact path="/search" render={(props) => <Buscador {...props}/>} />
         <Route component={NotFound} />
+        
       </Switch>
       
       </Layout>
-      
-      
       </BrowserRouter>
       </Suspense>
      </UserContextProvider>
