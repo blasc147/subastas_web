@@ -48,6 +48,7 @@ class Home extends React.Component{
       })
         .then(data => {
           sessionStorage.setItem("publico", data.access_token);
+          console.log("storage:  "+sessionStorage.getItem("publico"));
                   
               })
         .catch((error) => {
@@ -94,27 +95,13 @@ class Home extends React.Component{
 
   handleSubmit = async e => {
       e.preventDefault();
-      if (this.state.buscadorValue!=""){
-        this.setState({loading : true, error : null, redirect:true});
+      if (this.state.buscadorValue!==""){
+        this.setState({redirect:true});
       }
-      var busca= this.state.buscadorValue.toLowerCase();
-      if (this.state.data!=null){
-        var filtrar =  this.state.data.filter(function(art) {
-            return art.ArticuloDescripcion.toLowerCase().includes(busca)
-          });
-        
-      }
-      try {
-          this.setState({filtrados:filtrar})
-         
-          
-      } catch (error) {
-          this.setState({loading:false, error:error})
-      }
+      
   }
 
     render() {
-      
       if(this.state.loading === true && !this.state.data){
         return (
           <PageLoading></PageLoading>
@@ -137,7 +124,7 @@ class Home extends React.Component{
           <Redirect
             to={{
             pathname: "/search",
-            state: { articulos: this.state.filtrados,
+            state: { articulos: this.state.data,
                       palabra: this.state.buscadorValue }
           }}
         />

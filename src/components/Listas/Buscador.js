@@ -5,35 +5,62 @@ import ListaItem from './ListaItem';
 class Buscador extends React.Component{
     constructor(props) {
         super(props);
+        const busca= this.props.location.state.palabra.toLowerCase();
+        const filtrar =  this.props.location.state.articulos.filter(function(art) {
+            return art.ArticuloDescripcion.toLowerCase().includes(busca)
+          });
         this.state = {
-          data: this.props.location.state.articulos,
+          palabra:  busca,
+          data: filtrar,
         };
         
-        //this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange = e => {
+        this.setState({
+            palabra: e.target.value,
+         })
+    };
+    
+    handleSubmit = async e => {
+        e.preventDefault();
+        console.log("ultra pindonga");
+        const busca= this.state.palabra.toLowerCase();
+        if (this.state.palabra!==""){
+            const filtrar =  this.props.location.state.articulos.filter(function(art) {
+                return art.ArticuloDescripcion.toLowerCase().includes(busca)
+              });
+            this.setState({data:filtrar})
+        }
+        
     }
 
     render(){
+        
         return (
             <Fragment>
-            <section class="sptb bg-white border-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-7 col-md-12">
-                            <div class="sub-newsletter">
-                                <h3 class="mb-2"><i class="fa fa-search mr-2"></i> Busqueda : {this.props.location.state.palabra}</h3>
+            <section className="sptb bg-white border-top">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xl-6 col-lg-7 col-md-12">
+                            <div className="sub-newsletter">
+                                <h3 className="mb-2"><i className="fa fa-search mr-2"></i> Busqueda : {this.state.palabra}</h3>
                                 <Link to="/home">Volver al inicio</Link>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-lg-5 col-md-12">
-                            <div class="input-group sub-input mt-1">
-                                <input type="text" class="form-control input-lg " placeholder="Buscar articulo" />
-                                <div class="input-group-append ">
-                                    <button type="button" class="btn btn-primary btn-lg br-tr-7 br-br-7">
-                                        Buscar
-                                    </button>
+                        <div className="col-xl-6 col-lg-5 col-md-12">
+                            <form onSubmit={this.handleSubmit} >
+                                <div className="input-group sub-input mt-1">
+                                    <input type="text" className="form-control input-lg" id="text" placeholder="Buscar articulo" name="buscar" value={this.state.palabra} onChange={this.handleChange}/>
+                                    <div className="input-group-append ">
+                                        <button className="btn btn-primary btn-lg br-tr-7 br-br-7">
+                                            Buscar
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
