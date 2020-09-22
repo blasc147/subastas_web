@@ -17,7 +17,8 @@ class Home extends React.Component{
       categorias:null,
       buscadorValue: "",
       filtrados:null,
-      redirect:false
+      redirect:false,
+      login:null
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -27,46 +28,40 @@ class Home extends React.Component{
 
     componentDidMount(){
       this.getUsuario();
-      this.getArticulos();
+      //this.getArticulos();
     }
 
     getUsuario = async() => {
       this.setState({ loading:true, error:null});
-      
+      try{
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain' },
           body: "client_id=8aa0394f60cc46838f2b434be95c2c57&granttype=password&scope=FullControl&username=public&password=public123",
         };
-        fetch('https://devapp85.ecom.com.ar/SubastasTest/oauth/access_token', requestOptions)
-        .then(response => {
-          if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error('Error en las credenciales');
-            }
-      })
-        .then(data => {
-          sessionStorage.setItem("publico", data.access_token);
-          console.log("storage:  "+sessionStorage.getItem("publico"));
-                  
-              })
-        .catch((error) => {
-            console.log(error)
-          });
+        const response = await fetch('https://devapp85.ecom.com.ar/SubastasTest/oauth/access_token', requestOptions);
+        const data = await response.json();
+        sessionStorage.setItem("publico", data.access_token);
+        this.setState({login:sessionStorage.getItem("publico")})
+          console.log("storage:  "+this.state.login);
+        }catch(error){
+          console.log("error en el : "+error);
+          this.setState({ loading:false, error:error });
+        }
+
+        this.getArticulos();
     };
 
     getArticulos = async() => {
       this.setState({ loading:true, error:null});
       
         try{
-          const store = sessionStorage.getItem("publico");
             const requestOptions = {
               method: 'GET',
-              headers: { 'Authorization': 'OAuth '+store},
+              headers: { 'Authorization': 'OAuth '+this.state.login},
               
           };
-          console.log(store);
+          console.log(this.state.login);
             const response = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetArticles`, requestOptions);
             const responseCategorias = await fetch(`https://devapp85.ecom.com.ar/SubastasTest/rest/GetCategories`, requestOptions);
             const data = await response.json();
@@ -102,6 +97,7 @@ class Home extends React.Component{
   }
 
     render() {
+      
       if(this.state.loading === true && !this.state.data){
         return (
           <PageLoading></PageLoading>
